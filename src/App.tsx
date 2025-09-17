@@ -13,7 +13,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [descricao, setDescricao] = useState("");
   const [endereco, setEndereco] = useState("");
-  const [data, setData] = useState("");
+  const [dataCompra, setDataCompra] = useState("");
 
   function onComodosClick() {
     navigate(`/comodos`);
@@ -25,14 +25,13 @@ function App() {
     if (!descricao) return alert("Preencha o campo!");
     if (!endereco) return alert("Preencha o campo!");
 
-    console.log(data);
     try {
-      await useApi.createImovel({ descricao, endereco });
+      await useApi.createImovel({ descricao, endereco, dataCompra });
       const response = await useApi.getAllImoveis();
       setImoveis(response.data);
       setDescricao("");
       setEndereco("");
-      setData("");
+      setDataCompra("");
     } catch (error) {
       console.error("Erro ao adicionar imovel:", error);
       alert("Erro ao adicionar imovel");
@@ -83,8 +82,8 @@ function App() {
               type="date"
               name="data"
               className="border-2 p-2 rounded-2xl border-black w-full bg-gray-100 text-black placeholder-gray-500 focus:bg-white"
-              value={data}
-              onChange={(e) => setData(e.target.value)}
+              value={dataCompra}
+              onChange={(e) => setDataCompra(e.target.value)}
             />
             <button
               type="submit"

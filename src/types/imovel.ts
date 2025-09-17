@@ -2,6 +2,6 @@ export type Imovel = {
   _id: string;
   descricao: string;
   endereco: string;
-  dataCompra: Date;
+  dataCompra: string;
   comodosId: string[];
 };

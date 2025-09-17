@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { UseApi } from "../hooks/useAPI";
 import type { Imovel } from "../types/imovel";
 import type { Comodo } from "../types/comodo";
 import ComodosList from "../components/comodo_list";
 
 function ImovelPage() {
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const imovelId = searchParams.get("imovelId");
   const useApi = UseApi();
@@ -86,6 +87,12 @@ function ImovelPage() {
     fetchComodosEmpty();
   }, []);
 
+  function onEditClick() {
+    const query = new URLSearchParams();
+    query.set("imovelId", imovelId ? imovelId : "");
+    navigate(`/edit?${query}`);
+  }
+
   return (
     <div className="w-screen h-screen g-gray-600 flex flex-row">
       <div className="flex flex-col w-1/2 h-screen justify-center items-center">
@@ -95,7 +102,7 @@ function ImovelPage() {
           <p>Data Compra: {imovelData ? imovelData : "Sem data de compra"}</p>
           <p>Endereço: {imovelEndereco}</p>
         </div>
-        <div className="w-1/2 h-1/2">
+        <div className="flex felx-col w-1/2 h-1/2 justify-center items-center">
           <form
             onSubmit={handleSubmit}
             className="w-full h-1/2 flex flex-col justify-center items-center gap-4 p-4 rounded-xl gap-2"
@@ -117,10 +124,16 @@ function ImovelPage() {
               type="submit"
               className="bg-blue-600 text-white px-4 py-2 rounded-xl hover:bg-blue-700"
             >
-              Adicionar
+              Adicionar imóvel
             </button>
           </form>
         </div>
+        <button
+          onClick={onEditClick}
+          className="bg-blue-600 text-white px-4 py-2 rounded-xl hover:bg-blue-700"
+        >
+          Editar Imóvel
+        </button>
       </div>
       <div className="flex flex-col w-1/2 h-screen items-center justify-center">
         <ComodosList

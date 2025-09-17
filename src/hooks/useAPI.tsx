@@ -64,7 +64,17 @@ export const UseApi = () => ({
     );
   },
 
-  updateImovel: async (id: string, updatedData: Partial<Imovel>) => {
-    return await axios.put(`http://localhost:3000/imoveis/${id}`, updatedData);
+  updateImovel: async (
+    id: string,
+    descricao?: string,
+    endereco?: string,
+    dataCompra?: string
+  ) => {
+    const payload: any = {
+      descricao: descricao,
+      endereco: endereco,
+      dataCompra: dataCompra,
+    };
+    return await axios.put(`http://localhost:3000/imoveis/${id}`, payload);
   },
 });

@@ -2,8 +2,12 @@ import { useEffect, useState } from "react";
 import { UseApi } from "../hooks/useAPI";
 import type { Comodo } from "../types/comodo";
 import ComodosList from "../components/comodo_list";
+import { useNavigate } from "react-router-dom";
+import { ArrowLeftIcon } from "lucide-react";
 
 function ComodosPage() {
+  const navigate = useNavigate();
+
   const useApi = UseApi();
   const [name, setName] = useState("");
   const [comodos, setComodos] = useState<Comodo[]>([]);
@@ -40,6 +44,10 @@ function ComodosPage() {
     }
   };
 
+  function onReturnClick() {
+    navigate(`/`);
+  }
+
   return (
     <div className="w-screen h-screen g-gray-600 flex flex-row">
       <div className=" w-1/2 h-screen flex flex-col justify-center items-center gap-3">
@@ -65,6 +73,9 @@ function ComodosPage() {
             </button>
           </form>
         </div>
+        <button onClick={onReturnClick}>
+          <ArrowLeftIcon />
+        </button>
       </div>
       <div className="w-1/2 h-screen">
         <ComodosList
