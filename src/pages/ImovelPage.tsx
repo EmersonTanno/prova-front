@@ -4,6 +4,7 @@ import { UseApi } from "../hooks/useAPI";
 import type { Imovel } from "../types/imovel";
 import type { Comodo } from "../types/comodo";
 import ComodosList from "../components/comodo_list";
+import { ArrowLeftIcon } from "lucide-react";
 
 function ImovelPage() {
   const navigate = useNavigate();
@@ -93,9 +94,13 @@ function ImovelPage() {
     navigate(`/edit?${query}`);
   }
 
+  function onReturnClick() {
+    navigate(`/`);
+  }
+
   return (
     <div className="w-screen h-screen g-gray-600 flex flex-row">
-      <div className="flex flex-col w-1/2 h-screen justify-center items-center">
+      <div className="flex flex-col w-1/2 h-screen justify-center items-center gap-2">
         <div className="w-1/2 h-full flex flex-col justify-center items-center">
           <h1 className="font-bold text-black">Imóvel</h1>
           <p>Descrição: {imovelDescricao}</p>
@@ -133,6 +138,9 @@ function ImovelPage() {
           className="bg-blue-600 text-white px-4 py-2 rounded-xl hover:bg-blue-700"
         >
           Editar Imóvel
+        </button>
+        <button onClick={onReturnClick}>
+          <ArrowLeftIcon />
         </button>
       </div>
       <div className="flex flex-col w-1/2 h-screen items-center justify-center">

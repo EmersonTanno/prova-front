@@ -27,7 +27,7 @@ function ImovelList({ imoveis, setImoveis, loading }: ImovelListProps) {
 
   return (
     <div className="w-1/2 h-screen flex flex-col items-center p-6 gap-4 overflow-y-auto">
-      <h2 className="text-white text-xl font-bold mb-4">Lista de Comodos</h2>
+      <h2 className="text-white text-xl font-bold mb-4">Lista de Imóveis</h2>
       {imoveis.length > 0 ? (
         imoveis.map((imovel) => (
           <ImovelInfo

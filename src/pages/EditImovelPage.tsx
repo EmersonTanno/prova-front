@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { UseApi } from "../hooks/useAPI";
+import { ArrowLeftIcon } from "lucide-react";
 
 function EditImovelPage() {
   const useApi = UseApi();
@@ -56,45 +57,52 @@ function EditImovelPage() {
     fetchImoveis();
   }, []);
 
+  function onReturnClick() {
+    const query = new URLSearchParams();
+    query.set("imovelId", imovelId ? imovelId : "");
+    navigate(`/imovel?${query}`);
+  }
+
   return (
-    <div className="w-screen h-screen flex flex-col justify-center items-center">
-      <h1>
-        <h1>Editar Imóvel:</h1>
-        <form
-          className="gap-2 justify-center items-center flex flex-col"
-          onSubmit={handleSubmit}
+    <div className="w-screen h-screen flex flex-col justify-center items-center gap-2">
+      <h1>Editar Imóvel:</h1>
+      <form
+        className="gap-2 justify-center items-center flex flex-col"
+        onSubmit={handleSubmit}
+      >
+        <input
+          type="text"
+          name="descricao"
+          placeholder="Informe a descrição do imóvel"
+          className="border-2 p-2 rounded-2xl border-black w-full bg-gray-100 text-black placeholder-gray-500 focus:bg-white"
+          value={imovelDescricao}
+          onChange={(e) => setImovelDescricao(e.target.value)}
+        />
+        <input
+          type="text"
+          name="endereco"
+          placeholder="Informe o endereço do imóvel"
+          className="border-2 p-2 rounded-2xl border-black w-full bg-gray-100 text-black placeholder-gray-500 focus:bg-white"
+          value={imovelEndereco}
+          onChange={(e) => setImovelEndereco(e.target.value)}
+        />
+        <input
+          type="date"
+          name="data"
+          className="border-2 p-2 rounded-2xl border-black w-full bg-gray-100 text-black placeholder-gray-500 focus:bg-white"
+          value={imovelData}
+          onChange={(e) => setImovelData(e.target.value)}
+        />
+        <button
+          type="submit"
+          className="bg-white text-black px-4 py-2 rounded-xl"
         >
-          <input
-            type="text"
-            name="descricao"
-            placeholder="Informe a descrição do imóvel"
-            className="border-2 p-2 rounded-2xl border-black w-full bg-gray-100 text-black placeholder-gray-500 focus:bg-white"
-            value={imovelDescricao}
-            onChange={(e) => setImovelDescricao(e.target.value)}
-          />
-          <input
-            type="text"
-            name="endereco"
-            placeholder="Informe o endereço do imóvel"
-            className="border-2 p-2 rounded-2xl border-black w-full bg-gray-100 text-black placeholder-gray-500 focus:bg-white"
-            value={imovelEndereco}
-            onChange={(e) => setImovelEndereco(e.target.value)}
-          />
-          <input
-            type="date"
-            name="data"
-            className="border-2 p-2 rounded-2xl border-black w-full bg-gray-100 text-black placeholder-gray-500 focus:bg-white"
-            value={imovelData}
-            onChange={(e) => setImovelData(e.target.value)}
-          />
-          <button
-            type="submit"
-            className="bg-white text-black px-4 py-2 rounded-xl"
-          >
-            <p>Submit</p>
-          </button>
-        </form>
-      </h1>
+          <p>Submit</p>
+        </button>
+      </form>
+      <button onClick={onReturnClick}>
+        <ArrowLeftIcon />
+      </button>
     </div>
   );
 }
