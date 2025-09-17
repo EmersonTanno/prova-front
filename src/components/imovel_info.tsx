@@ -1,4 +1,4 @@
-import { PencilIcon, Trash } from "lucide-react";
+import { ArrowRight, PencilIcon, Trash } from "lucide-react";
 import type { Imovel } from "../types/imovel";
 import { useNavigate } from "react-router-dom";
 
@@ -33,7 +33,7 @@ function ImovelInfo({ imovel, onDeleteImovel }: ImovelInfoProps) {
         (
         <>
           <button onClick={onEditClick}>
-            <PencilIcon />
+            <ArrowRight />
           </button>
           <button
             title="Deletar imovel"
